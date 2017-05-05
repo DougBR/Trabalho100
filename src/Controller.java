@@ -17,8 +17,7 @@ class EventSet {
 			if(start == next) looped = true;
 			// If it loops past start, the list
 			// is empty:
-			if((next == (start + 1) % events.length)
-					&& looped)
+			if((next == (start + 1) % events.length) && looped)
 				return null;
 		} while(events[next] == null);
 		return events[next];
@@ -29,7 +28,9 @@ class EventSet {
 }
 public class Controller {
 	private EventSet es = new EventSet();
-	public void addEvent(Event c) { es.add(c); }
+	public void addEvent(Event c) { 
+		es.add(c); 
+	}
 	public void run() {
 		Event e;
 		while((e = es.getNext()) != null) {
