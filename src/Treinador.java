@@ -9,6 +9,9 @@ public class Treinador {
 		System.out.println(nome + "fugiu!");
 	}
 	void apresenta(){
-		System.out.println(this.nome);;
+		System.out.println("Oi. Sou "+ nome + " e tenho os pokemons:");
+		for (int i = 0; i < pokemon.length; i++)
+			System.out.print(pokemon.toString());
 	}
+	
 }
