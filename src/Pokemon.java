@@ -3,7 +3,7 @@ public class Pokemon {
 	int vida;
 	Ataque ataques[] = new Ataque[3];
 	
-	public Evento atacar(){
+	public Event atacar(){
 		return ataques[1];
 	}
 }

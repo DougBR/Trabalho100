@@ -4,6 +4,4 @@ public class ChoqueDoTrovao extends Ataque {
 		nome = "Choque Do Tovao";
 		forca = 20;
 	}
-	
-	
 }
