@@ -3,7 +3,20 @@ public class Pokemon {
 	int vida;
 	Ataque ataques[] = new Ataque[3];
 	
-	public Event atacar(){
-		return ataques[1];
+
+	public Ataque getAtaque(int n){
+		return ataques[n];
+	}
+	
+	public String getNome(){
+		return nome;
+	}
+	
+	public int getVida(){
+		return vida;
+	}
+	
+	public void setVida(int n){
+		vida = n;
 	}
 }
