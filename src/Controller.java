@@ -25,9 +25,10 @@ class EventSet {
 	public void removeCurrent() {
 		events[next] = null;
 	}
+	
 }
 public class Controller {
-	private EventSet es = new EventSet();
+	protected EventSet es = new EventSet();
 	public void addEvent(Event c) { 
 		es.add(c); 
 	}
@@ -41,4 +42,6 @@ public class Controller {
 			}
 		}
 	}
+	
+	
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\Toshi\OneDrive\Área de Trabalho\Poli\MAC0321\Trabalho100"/>
 		<item value="/home/sala6.07/Área de trabalho/AUla/Trabalho100"/>
 	</list>
 	<section name="ResourceNavigator">
-		<item value="Aggregate for window 1493993664094" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
 		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
 	</section>
 	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
