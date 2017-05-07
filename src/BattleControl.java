@@ -1,7 +1,7 @@
 
 
 public class BattleControl extends Controller {
-	long TEMPO = 2000;
+	long TEMPO = 1000;
 	public class Batalhar extends Event {
 		Treinador t1, t2;
 		long tm = System.currentTimeMillis();
@@ -13,12 +13,15 @@ public class BattleControl extends Controller {
 		}
 		
 		public void action() {
-			addEvent(new Apresentar(t1, tm + TEMPO));
-			addEvent(new Apresentar(t2, tm+2*TEMPO));
-			addEvent(new Lancar(t1, tm+3*TEMPO));
-			addEvent(new Lancar(t2, tm+4*TEMPO));
-			t1.agir(tm+6*TEMPO, es);
-			t2.agir(tm+7*TEMPO, es);
+			int cont = 1;
+			addEvent(new Apresentar(t1, tm + cont * TEMPO)); cont++;
+			addEvent(new Apresentar(t2, tm+ cont*TEMPO)); cont++;
+			addEvent(new Lancar(t1, tm+cont*TEMPO)); cont++;
+			addEvent(new Lancar(t2, tm+cont*TEMPO)); cont++;
+			t1.agir(t1, t2, es, tm+cont*TEMPO); cont++;
+			t2.agir(t2, t2, es, tm+cont*TEMPO); cont++;
+			
+			
 			
 		}
 
@@ -59,7 +62,6 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			
 			return t.getNome() + ": Vai " + t.getPokeAtivo().getNome() +"!! Eu escolho você";
 		}
 	}
@@ -76,13 +78,73 @@ public class BattleControl extends Controller {
 			t.fugir();
 			es.add(null);
 		}
-
-		@Override
 		public String description() {
 			return t.getNome()+ " foge da batalha";
 		}
-		
 	}
+	
+	public class Atacar extends Event{
+		Treinador t1, t2;
+		EventSet es;
+		int nAtaque = 0;
+		long tm;
+		public Atacar(Treinador t1, Treinador t2, EventSet es, long tm){
+			super(tm);
+			this.tm = tm;
+			this.t1 = t1;
+			this.t2 = t2;
+			this.es = es;
+		}
+		public void action() {
+			t2.getPokeAtivo().setVida(	t2.getPokeAtivo().getVida() - 
+										t1.getPokeAtivo().getAtaque(nAtaque).getForca());
+			System.out.println(	t1.getNome() + 	
+								": " +
+								t1.getPokeAtivo().getNome() + 
+								", " + 
+								t1.getPokeAtivo().getAtaque(nAtaque).getNome());
+			System.out.println(	t2.getPokeAtivo().getNome() + 
+								" leva "+
+								t1.getPokeAtivo().getAtaque(nAtaque).getForca() + 
+								" de dano");
+			if(t2.getPokeAtivo().getVida() == 0){
+				es.add(new Lancar(t1, tm + TEMPO));
+			}
+		}
+
+		public String description() {
+			return  t2.getPokeAtivo().getNome() + " está com " +
+					String.valueOf(t2.getPokeAtivo().getVida()) + " de vida";
+		}
+	}
+	
+	/*
+	public class Agir extends Event{
+		Treinador t1, t2;
+		EventSet es;
+		int cont = 1;
+		long tm;
+		public Agir(Treinador t1, Treinador t2, EventSet es, long tm){
+			super(tm);
+			this.tm = tm;
+			this.t1 = t1;
+			this.t2 = t2;
+			this.es = es;
+		}
+		public void action() {
+			do {
+				t1.agir(t1, t2, es, tm+cont*TEMPO); cont++;
+				t2.agir(t2, t1, es, tm+cont*TEMPO); cont++;
+			} while ((t1.getPokeAtivo() != null) && (t2.getPokeAtivo() != null));
+			
+		}
+
+		public String description() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+	} */
 	
 	public static void main(String[] args) {
 		BattleControl bc = new BattleControl();

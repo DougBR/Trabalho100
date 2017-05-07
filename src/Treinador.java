@@ -20,7 +20,8 @@
 	
 	public void lancar(){
 		int i = 0;
-		for (i = 0; pokemon[i] != null; i++)
+		
+		for (i = 0; pokemon[i] != null; i++) 
 			pokeAtivo = pokemon[i];
 		if(i==0){
 			//Morreu
@@ -35,7 +36,7 @@
 		return nome;
 	}
 	
-	abstract public void agir(long tm, EventSet es);
+	abstract public void agir(Treinador t1, Treinador t2, EventSet es, long tm);
 		
 	
 }

@@ -5,5 +5,4 @@ public class Pikachu extends Pokemon {
 		vida = 100;
 		ataques[0] = new ChoqueDoTrovao();
 	}
-	
 }
