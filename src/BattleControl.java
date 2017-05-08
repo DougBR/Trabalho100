@@ -19,7 +19,7 @@ public class BattleControl extends Controller {
 			addEvent(new Lancar(t1, tm+cont*TEMPO)); cont++;
 			addEvent(new Lancar(t2, tm+cont*TEMPO)); cont++;
 			t1.agir(t1, t2, es, tm+cont*TEMPO); cont++;
-			t2.agir(t2, t2, es, tm+cont*TEMPO); cont++;
+			t2.agir(t2, t1, es, tm+cont*TEMPO); cont++;
 			
 			
 			
