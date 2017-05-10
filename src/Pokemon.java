@@ -17,6 +17,9 @@ public class Pokemon {
 	}
 	
 	public void setVida(int n){
-		vida = n;
+		if(n<0)
+			vida = 0;
+		else
+			vida = n;
 	}
 }

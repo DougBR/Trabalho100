@@ -19,6 +19,9 @@ class EventSet {
 	public void jumpAdd(Event e){
 		events.add(1, e);
 	}
+	public void clearAll(){
+		events.clear();
+	}
 	
 }
 public class Controller {
@@ -31,7 +34,8 @@ public class Controller {
 		while((e = es.getNext()) != null) {
 			if(e.ready()) {
 				e.action();
-				System.out.println(e.description());
+				if(e.description() !=null)
+					System.out.println(e.description());
 				es.removeCurrent();
 			}
 		}

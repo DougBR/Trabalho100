@@ -1,7 +1,7 @@
 
 
 public class BattleControl extends Controller {
-	long TEMPO = 1000;
+	long TEMPO = 2000;
 	public class Batalhar extends Event {
 		Treinador t1, t2;
 		long tm = System.currentTimeMillis();
@@ -18,10 +18,7 @@ public class BattleControl extends Controller {
 			addEvent(new Apresentar(t2, tm+ cont*TEMPO)); cont++;
 			addEvent(new Lancar(t1, tm+cont*TEMPO)); cont++;
 			addEvent(new Lancar(t2, tm+cont*TEMPO)); cont++;
-			t1.agir(t1, t2, es, tm+cont*TEMPO); cont++;
-			t2.agir(t2, t1, es, tm+cont*TEMPO); cont++;
-			
-			
+			addEvent(new Agir(t1, t2, es, tm+cont*TEMPO)); cont++;
 			
 		}
 
@@ -107,17 +104,70 @@ public class BattleControl extends Controller {
 								" leva "+
 								t1.getPokeAtivo().getAtaque(nAtaque).getForca() + 
 								" de dano");
-			if(t2.getPokeAtivo().getVida() == 0){
-				es.add(new Lancar(t1, tm + TEMPO));
+			System.out.println(	t2.getPokeAtivo().getNome() + " está com " +
+								String.valueOf(t2.getPokeAtivo().getVida()) + " de vida");
+			if(t2.getPokeAtivo().getVida()<=0){
+				boolean morreu = t2.pokeMorreu();
+				if(morreu == true){
+					es.clearAll();
+					es.add(new Fim(t1, es, tm + TEMPO)); // esse Evento é retirado pelo Controler após a execução do Evento atual
+					es.add(new Fim(t1, es, tm + TEMPO));
+				}	
+				else{
+					es.add(new Lancar(t1, tm + TEMPO));	
+				}
 			}
+			
 		}
 
 		public String description() {
-			return  t2.getPokeAtivo().getNome() + " está com " +
-					String.valueOf(t2.getPokeAtivo().getVida()) + " de vida";
+			return  null;
 		}
 	}
 	
+	public class Agir extends Event{
+		Treinador t1, t2;
+		EventSet es;
+		int nAtaque = 0;
+		long tm;
+		public Agir(Treinador t1, Treinador t2, EventSet es, long tm){
+			super(tm);
+			this.tm = tm;
+			this.t1 = t1;
+			this.t2 = t2;
+			this.es = es;
+		}
+		
+		public void action() {
+			es.add(t1.agir(t1, t2, es, tm+2*TEMPO)); 
+			es.add(t2.agir(t2, t1, es, tm+4*TEMPO)); 
+			es.add(new Agir(t1, t2, es, tm + 6*TEMPO));
+			
+		}
+		public String description() {
+			
+			return "\nE começa o round";
+		}
+		
+	}
+	
+	public class Fim extends Event{
+		EventSet es;
+		Treinador vencedor;
+		public Fim(Treinador t, EventSet es, long tm){
+			super(tm);
+			vencedor = t;
+			this.es = es;
+		}
+
+		public void action() {
+		}
+
+		public String description() {
+			
+			return "E o vencedor é: " + vencedor.getNome();
+		}
+	}
 	/*
 	public class Agir extends Event{
 		Treinador t1, t2;
@@ -150,7 +200,7 @@ public class BattleControl extends Controller {
 		BattleControl bc = new BattleControl();
 		long tm = System.currentTimeMillis();
 		Treinador t1 = new Ash();
-		Treinador t2 = new Cagao();
+		Treinador t2 = new Brook();
 		bc.addEvent(bc.new Batalhar(t1, t2, tm));
 		bc.run();
 		System.out.println("Fim de batalha");
