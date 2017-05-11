@@ -1,5 +1,4 @@
 
-
 public class BattleControl extends Controller {
 	long TEMPO = 2000;
 	public class Batalhar extends Event {
@@ -23,7 +22,6 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			// TODO Auto-generated method stub
 			return "E começa a batalha";
 		}
 		
@@ -41,7 +39,6 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			// TODO Auto-generated method stub
 			return "Vamos batalhar!!";
 		}
 		

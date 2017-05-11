@@ -11,16 +11,12 @@ public class PokemonControls extends Controller{
 			super(eventTime);
 			atacado = p;
 		}
-		@Override
 		public void action() {
 			atacado.vida -= forca;
 			
 		}
-
-		@Override
 		public String description() {
-			// TODO Auto-generated method stub
-			return null;
+			return "Deu cabecada";
 		}
 		
 	}
@@ -30,12 +26,9 @@ public class PokemonControls extends Controller{
 		}
 		public void action() {
 			long tm = System.currentTimeMillis();
-			// Instead of hard-wiring, you could parse
-			// configuration information from a text
-			// file here:
 			rounds = 5;
 			addEvent(new daCabecada(new Pokemon(), tm));
-			// Can even add a Restart object!
+			
 			addEvent(new Restart(tm + 20000));
 		}
 		public String description() {
