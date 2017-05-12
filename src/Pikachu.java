@@ -4,6 +4,6 @@ public class Pikachu extends Pokemon {
 		nome = "Pikachu";
 		vida = vidaMax = 100;
 		
-		ataques[0] = new ChoqueDoTrovao();
+		ataques.add(new ChoqueDoTrovao());
 	}
 }

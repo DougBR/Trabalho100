@@ -41,7 +41,6 @@ public class BattleControl extends Controller {
 		public String description() {
 			return "Vamos batalhar!!";
 		}
-		
 	}
 	
 	private class Lancar extends Event{
@@ -59,7 +58,7 @@ public class BattleControl extends Controller {
 			return null;
 		}
 	}
-	
+
 	public class Fugir extends Event{
 		Treinador t1, t2;
 		EventSet es;
@@ -85,14 +84,16 @@ public class BattleControl extends Controller {
 	public class Atacar extends Event{
 		Treinador t1, t2;
 		EventSet es;
-		int nAtaque = 0;
+		int nAtaque;
 		long tm;
-		public Atacar(Treinador t1, Treinador t2, EventSet es, long tm){
+		public Atacar(Treinador t1, Treinador t2, int nAtaque, EventSet es, long tm){
 			super(tm);
 			this.tm = tm;
 			this.t1 = t1;
 			this.t2 = t2;
 			this.es = es;
+			this.nAtaque = nAtaque%t1.getNAtaque();
+			
 		}
 		public void action() {
 			t2.getPokeAtivo().setVida(	t2.getPokeAtivo().getVida() - 
@@ -206,9 +207,6 @@ public class BattleControl extends Controller {
 				es.add(e2);
 				es.add(e1);
 			}
-			
-				
-			
 			es.add(new Agir(t1, t2, es, tm + 6*TEMPO));
 			
 		}
@@ -218,7 +216,6 @@ public class BattleControl extends Controller {
 		}
 		
 	}
-	
 	public class Fim extends Event{
 		EventSet es;
 		Treinador vencedor;
@@ -232,11 +229,9 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			
 			return "E o vencedor é: " + vencedor.getNome();
 		}
 	}
-	
 	public int getPrioridade(Event e){
 		if(e instanceof Fugir)
 			return 1;
@@ -252,11 +247,20 @@ public class BattleControl extends Controller {
 	public static void main(String[] args) {
 		BattleControl bc = new BattleControl();
 		long tm = System.currentTimeMillis();
-		Treinador t1 = new Ash();
-		Treinador t2 = new Bobao();
-		bc.addEvent(bc.new Batalhar(t1, t2, tm));
-		bc.run();
-		System.out.println("Fim de batalha");
+		int mode = Integer.parseInt(args[0]);
+		Treinador t1, t2;
+		if (mode == 1){
+			t1 = new Ash();
+			t2 = new Brook();
+			bc.addEvent(bc.new Batalhar(t1, t2, tm));
+			bc.run();
+			System.out.println("Fim de batalha");
+		}
+		else{
+			t1 = new Ash();
+			t2 = new Cagao();
+			Terreno ter = new Terreno(t1, t2);
+			//ter.ataqueSelvagem();
+		}
 	}
-	
 }

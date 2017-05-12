@@ -1,9 +1,10 @@
 
 
-public class Brook extends Treinador {
+public class Selvagem extends Treinador {
 
-	public Brook(){
-		nome = "Brook";
+	
+	public Selvagem(){
+		nome = "Selvagem";
 		pokemon.add(new Charmander());
 	}
 
@@ -14,5 +15,5 @@ public class Brook extends Treinador {
 			nAtaque = 0;
 		return (bc.new Atacar(t1, t2, nAtaque, es, tm));
 	}
-
+	
 }

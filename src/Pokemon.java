@@ -1,11 +1,17 @@
+import java.util.Vector;
+
 public class Pokemon {
 	String nome;
 	int vida, vidaMax;
-	Ataque ataques[] = new Ataque[3];
+	Vector<Ataque> ataques = new Vector<Ataque> ();
 	
 
 	public Ataque getAtaque(int n){
-		return ataques[n];
+		return ataques.get(n);
+	}
+	
+	public int getNAtaque(){
+		return ataques.size();
 	}
 	
 	public String getNome(){
