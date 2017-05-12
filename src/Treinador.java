@@ -23,7 +23,7 @@ public abstract class Treinador {
 	}
 	
 	public void lancar(){
-		System.out.println(nome + ": Vai " + ((Pokemon) pokemon.get(0)).getNome() +"!! Eu escolho voc�");
+		System.out.println(nome + ": Vai " +  pokemon.get(0).getNome() +"!! Eu escolho voc�");
 		}	
 	public boolean trocar(){
 		if(pokemon.size()==1){
