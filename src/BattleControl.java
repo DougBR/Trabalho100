@@ -111,7 +111,7 @@ public class BattleControl extends Controller {
 								String.valueOf(t2.getPokeAtivo().getVida()) + " de vida");
 			if(t2.getPokeAtivo().getVida()<=0){
 				boolean morreu = t2.pokeMorreu();
-				if(morreu == true){
+				if (morreu) {
 					es.clearAll();
 					es.add(new Fim(t1, es, tm + TEMPO)); // esse Evento ï¿½ retirado pelo Controler apï¿½s a execuï¿½ï¿½o do Evento atual
 					es.add(new Fim(t1, es, tm + TEMPO));
@@ -263,11 +263,13 @@ public class BattleControl extends Controller {
 			BattleControl bc2 = new BattleControl();
 			bc1.addEvent(bc1.new Batalhar(t1, t3, tm));
 			bc1.run();
+			System.out.println("O ataque selvagem a "+t1.getNome()+" na posição "+ter.getTerreno(t1) +" acabou");
 			bc2.addEvent(bc2.new Batalhar(t2, t3, tm));
 			bc2.run();
+			System.out.println("O ataque selvagem a "+t2.getNome()+" na posição "+ter.getTerreno(t2) +" acabou");
 			t1.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
 			t2.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
-			System.out.println("O ataque selvagem passou");
+			
 			if ((ter.getTerreno(t1) == ter.getTerreno(t2)) && ter.getTerreno(t1) == 1)
 				mode = 0;
 		}

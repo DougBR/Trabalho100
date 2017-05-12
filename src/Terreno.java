@@ -20,8 +20,8 @@ public class Terreno {
 		return terreno[t.getPosition()];
 	}
 	void position(){
-		tr[0].setPosition((int) (maxLength*Math.random() + 1));
-		tr[0].setPosition((int) (maxLength*Math.random() + 1));
+		tr[0].setPosition((int) (getLength()*Math.random()));
+		tr[0].setPosition((int) (getLength()*Math.random()));
 	}
 	public int getLength() {
 		return terreno.length;
