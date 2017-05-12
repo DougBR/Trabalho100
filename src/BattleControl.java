@@ -165,42 +165,24 @@ public class BattleControl extends Controller {
 			return "E o vencedor �: " + vencedor.getNome();
 		}
 	}
-	/*
-	public class Agir extends Event{
-		Treinador t1, t2;
-		EventSet es;
-		int cont = 1;
-		long tm;
-		public Agir(Treinador t1, Treinador t2, EventSet es, long tm){
-			super(tm);
-			this.tm = tm;
-			this.t1 = t1;
-			this.t2 = t2;
-			this.es = es;
-		}
-		public void action() {
-			do {
-				t1.agir(t1, t2, es, tm+cont*TEMPO); cont++;
-				t2.agir(t2, t1, es, tm+cont*TEMPO); cont++;
-			} while ((t1.getPokeAtivo() != null) && (t2.getPokeAtivo() != null));
-			
-		}
-
-		public String description() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
-	} */
-	
 	public static void main(String[] args) {
 		BattleControl bc = new BattleControl();
 		long tm = System.currentTimeMillis();
-		Treinador t1 = new Ash();
-		Treinador t2 = new Brook();
-		bc.addEvent(bc.new Batalhar(t1, t2, tm));
-		bc.run();
-		System.out.println("Fim de batalha");
+		int mode = Integer.parseInt(args[0]);
+		Treinador t1, t2;
+		if (mode == 1){
+			t1 = new Ash();
+			t2 = new Brook();
+			bc.addEvent(bc.new Batalhar(t1, t2, tm));
+			bc.run();
+			System.out.println("Fim de batalha");
+		}
+		else{
+			t1 = new Ash();
+			t2 = new Cagao();
+			Terreno ter = new Terreno(t1, t2);
+			//ter.ataqueSelvagem();
+		}
 	}
 	
 }

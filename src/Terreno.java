@@ -1,0 +1,30 @@
+import java.lang.Math;
+public class Terreno {
+	private int tatame = 1;
+	private int grama  = 0;
+	private int maxLength = 100;
+	private int[] terreno;
+	private Treinador[] tr = new Treinador[2];
+	private Treinador selvagem = new Selvagem();;
+	/*Esta classe cria um terreno unidimensional para que os pokémons andem
+	 * Locais com valor 0 são grama, com valor 1 são tatames.
+	 * */
+	public Terreno(Treinador tr1, Treinador tr2){
+		terreno  = new int[(int) (maxLength*Math.random() + 1)];
+		for (int i = 0; i < terreno.length; i++)
+			terreno[i] = (int) (Math.random() + 1);
+		tr[0] = tr1;
+		tr[1] = tr2;
+	}
+	public int getTatame(){
+		return tatame;
+	}
+	public void ataqueSelvagem(EventSet es, long tm) {
+		int i = 0;
+		while (terreno[i] != tatame){
+			//selvagem.agir(tr[0], tr[1], es, tm);
+			i++;
+		}
+		
+	}
+}

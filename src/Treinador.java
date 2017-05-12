@@ -3,20 +3,17 @@ import java.util.Iterator;
 
 public abstract class Treinador {
 	String nome;
-	Vector pokemon = new Vector();
+	Vector<Pokemon> pokemon = new Vector<Pokemon>();
 	int pokeAtivo = 0;
 	
 	void trocar (){
 		
 	}
-	void atacar(){
-		
-	}
 	void fugir (){
-		System.out.println(nome + ": Eu não aguento mais!!");
+		System.out.println(nome + ": Eu nï¿½o aguento mais!!");
 	}
 	public void apresenta(){
-		Iterator itr = pokemon.iterator();
+		Iterator<Pokemon> itr = pokemon.iterator();
 		System.out.println("Oi. Sou "+ nome + " e tenho os pokemons:");
 		while(itr.hasNext()){
 			Pokemon p = (Pokemon) itr.next();
@@ -30,10 +27,10 @@ public abstract class Treinador {
 	
 	
 	public boolean pokeMorreu(){
-		System.out.println(((Pokemon) pokemon.get(0)).getNome() + " está fora de combate" );
+		System.out.println(((Pokemon) pokemon.get(0)).getNome() + " estï¿½ fora de combate" );
 		pokemon.remove(0);
 		if(pokemon.isEmpty()){
-			System.out.println(nome + " não tem mais pokemons para lutar");
+			System.out.println(nome + " nï¿½o tem mais pokemons para lutar");
 		}
 		return pokemon.isEmpty();
 	}
@@ -42,6 +39,12 @@ public abstract class Treinador {
 		if (pokemon.isEmpty())
 			return null;
 		return (Pokemon) pokemon.get(0);
+	}
+	public Pokemon getRandomPokemon(){
+		if (pokemon.isEmpty())
+			return null;
+		int chosen = (int) (Math.random()*pokemon.size() + 1);
+		return  pokemon.get(chosen);
 	}
 	
 	public String getNome(){
