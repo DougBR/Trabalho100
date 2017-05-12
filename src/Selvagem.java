@@ -4,7 +4,7 @@ public class Selvagem extends Treinador {
 	
 	public Selvagem(){
 		nome = "Selvagem";
-		pokemon.add(new Charmander());
+		pokemon.add(new Magikarp());
 	}
 
 	public Event agir(Treinador t1, Treinador t2, EventSet es, long tm) {

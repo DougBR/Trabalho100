@@ -246,9 +246,14 @@ public class BattleControl extends Controller {
 		t2 = new Brook();
 
 		while (mode == 1) {
+			Terreno ter = new Terreno(t1, t2);
 			t3 = new Selvagem();
-			Terreno ter = new Terreno(t1, t3);
-			bc.run();
+			BattleControl bc1 = new BattleControl();
+			BattleControl bc2 = new BattleControl();
+			bc1.addEvent(bc1.new Batalhar(t1, t3, tm));
+			bc1.run();
+			bc2.addEvent(bc2.new Batalhar(t2, t3, tm));
+			bc2.run();
 			t1.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
 			t2.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
 			System.out.println("O ataque selvagem passou");
