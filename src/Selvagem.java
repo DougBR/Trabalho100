@@ -1,7 +1,6 @@
 
 
 public class Selvagem extends Treinador {
-
 	
 	public Selvagem(){
 		nome = "Selvagem";
@@ -15,5 +14,4 @@ public class Selvagem extends Treinador {
 			nAtaque = 0;
 		return (bc.new Atacar(t1, t2, nAtaque, es, tm));
 	}
-	
 }
