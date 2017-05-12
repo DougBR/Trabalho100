@@ -247,20 +247,33 @@ public class BattleControl extends Controller {
 	public static void main(String[] args) {
 		BattleControl bc = new BattleControl();
 		long tm = System.currentTimeMillis();
+		if (args.length < 1){
+			System.out.println("java BatteControl <mode>");
+			return;
+		}
 		int mode = Integer.parseInt(args[0]);
-		Treinador t1, t2;
-		if (mode == 1){
-			t1 = new Ash();
-			t2 = new Brook();
-			bc.addEvent(bc.new Batalhar(t1, t2, tm));
-			bc.run();
-			System.out.println("Fim de batalha");
-		}
-		else{
-			t1 = new Ash();
-			t2 = new Cagao();
+		Treinador t1, t2, t3;
+		t1 = new Ash();
+		t2 = new Brook();
+
+		while (mode == 1) {
 			Terreno ter = new Terreno(t1, t2);
-			//ter.ataqueSelvagem();
+			t3 = new Selvagem();
+			BattleControl bc1 = new BattleControl();
+			BattleControl bc2 = new BattleControl();
+			bc1.addEvent(bc1.new Batalhar(t1, t3, tm));
+			bc1.run();
+			bc2.addEvent(bc2.new Batalhar(t2, t3, tm));
+			bc2.run();
+			t1.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
+			t2.nextPosition((int) (ter.getLength()*Math.random() + 1)%ter.getLength());
+			System.out.println("O ataque selvagem passou");
+			if ((ter.getTerreno(t1) == ter.getTerreno(t2)) && ter.getTerreno(t1) == 1)
+				mode = 0;
 		}
+		bc.addEvent(bc.new Batalhar(t1, t2, tm));
+		bc.run();
+		System.out.println("Fim de batalha");
+		
 	}
 }

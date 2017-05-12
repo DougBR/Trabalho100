@@ -6,6 +6,7 @@ public abstract class Treinador {
 	String nome;
 	Vector<Pokemon> pokemon = new Vector<Pokemon>();
 	int nAtaque = -1;
+	int position;
 	Pokemon pokeAtivo;
 	
 	void fugir (){
@@ -39,11 +40,13 @@ public abstract class Treinador {
 		if(pokeAtivo.getVida() > pokeAtivo.getVidaMax()){
 			pokeAtivo.setVida(pokeAtivo.getVidaMax());
 		}
-		
-		
-		
 	}
-	
+	void setPosition(int pos) {
+		position = pos;
+	}
+	void nextPosition( int inc) {
+		position += inc;
+	}
 	
 	public boolean pokeMorreu(){
 		System.out.println(((Pokemon) pokemon.get(0)).getNome() + " est� fora de combate" );
@@ -77,6 +80,9 @@ public abstract class Treinador {
 	}
 	
 	abstract public Event agir(Treinador t1, Treinador t2, EventSet es, long tm);
+	public int getPosition() {
+		return position;
+	}
 		
 	
 }
