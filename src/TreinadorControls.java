@@ -10,11 +10,5 @@ public class TreinadorControls extends Controller {
 			
 		}
 
-		@Override
-		public String description() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 		
-	}
 }

@@ -22,7 +22,7 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			return "E começa a batalha";
+			return "E comeÃ§a a batalha";
 		}
 		
 	}
@@ -56,7 +56,7 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			return t.getNome() + ": Vai " + t.getPokeAtivo().getNome() +"!! Eu escolho você";
+			return t.getNome() + ": Vai " + t.getPokeAtivo().getNome() +"!! Eu escolho vocÃª";
 		}
 	}
 	
@@ -101,13 +101,13 @@ public class BattleControl extends Controller {
 								" leva "+
 								t1.getPokeAtivo().getAtaque(nAtaque).getForca() + 
 								" de dano");
-			System.out.println(	t2.getPokeAtivo().getNome() + " está com " +
+			System.out.println(	t2.getPokeAtivo().getNome() + " estÃ¡ com " +
 								String.valueOf(t2.getPokeAtivo().getVida()) + " de vida");
 			if(t2.getPokeAtivo().getVida()<=0){
 				boolean morreu = t2.pokeMorreu();
 				if(morreu == true){
 					es.clearAll();
-					es.add(new Fim(t1, es, tm + TEMPO)); // esse Evento é retirado pelo Controler após a execução do Evento atual
+					es.add(new Fim(t1, es, tm + TEMPO)); // esse Evento ï¿½ retirado pelo Controler apï¿½s a execuï¿½ï¿½o do Evento atual
 					es.add(new Fim(t1, es, tm + TEMPO));
 				}	
 				else{
@@ -143,7 +143,7 @@ public class BattleControl extends Controller {
 		}
 		public String description() {
 			
-			return "\nE começa o round";
+			return "\nE comeÃ§a o round";
 		}
 		
 	}
@@ -162,7 +162,7 @@ public class BattleControl extends Controller {
 
 		public String description() {
 			
-			return "E o vencedor é: " + vencedor.getNome();
+			return "E o vencedor ï¿½: " + vencedor.getNome();
 		}
 	}
 	/*
