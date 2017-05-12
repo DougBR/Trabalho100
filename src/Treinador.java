@@ -37,7 +37,7 @@ public abstract class Treinador {
 	public void curar(){
 		int CURAR = 10;
 		pokeAtivo = (Pokemon)pokemon.get(0);
-		pokeAtivo.setVida(pokeAtivo.getVidaMax() + CURAR);
+		pokeAtivo.setVida(pokeAtivo.getVida() + CURAR);
 		if(pokeAtivo.getVida() > pokeAtivo.getVidaMax()){
 			pokeAtivo.setVida(pokeAtivo.getVidaMax());
 		}
