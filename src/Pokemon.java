@@ -1,6 +1,6 @@
 public class Pokemon {
 	String nome;
-	int vida;
+	int vida, vidaMax;
 	Ataque ataques[] = new Ataque[3];
 	
 
@@ -14,6 +14,9 @@ public class Pokemon {
 	
 	public int getVida(){
 		return vida;
+	}
+	public int getVidaMax(){
+		return vidaMax;
 	}
 	
 	public void setVida(int n){

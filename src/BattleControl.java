@@ -1,6 +1,6 @@
 
 public class BattleControl extends Controller {
-	long TEMPO = 2000;
+	long TEMPO = 1000;
 	public class Batalhar extends Event {
 		Treinador t1, t2;
 		long tm = System.currentTimeMillis();
@@ -56,21 +56,25 @@ public class BattleControl extends Controller {
 		}
 
 		public String description() {
-			return t.getNome() + ": Vai " + t.getPokeAtivo().getNome() +"!! Eu escolho você";
+			return null;
 		}
 	}
 	
 	public class Fugir extends Event{
 		Treinador t;
 		EventSet es;
+		long tm;
 		public Fugir(Treinador t1, long tm, EventSet es){
 			super(tm);
+			this.tm = tm;
 			t = t1;
 			this.es = es;
 		}
 		public void action() {
 			t.fugir();
-			es.add(null);
+			es.clearAll();
+			es.add(new Fim(t, es, tm + TEMPO)); // esse Evento é retirado pelo Controler após a execução do Evento atual
+			es.add(new Fim(t, es, tm + TEMPO));
 		}
 		public String description() {
 			return t.getNome()+ " foge da batalha";
@@ -122,6 +126,57 @@ public class BattleControl extends Controller {
 		}
 	}
 	
+	public class Trocar extends Event{
+		Treinador t1, t2;
+		EventSet es;
+		int nAtaque = 0;
+		long tm;
+		public Trocar(Treinador t1, EventSet es, long tm){
+			super(tm);
+			this.tm = tm;
+			this.t1 = t1;
+			this.t2 = t2;
+			this.es = es;
+		}
+		public void action() {
+			boolean trocou;
+			trocou = t1.trocar();
+			if(trocou){
+				System.out.println(t1.getNome() + " trocou de pokemon");
+				t1.lancar();
+			}
+			else
+				System.out.println(t1.getNome() + " tentou trocar de pokemon");
+		}
+		public String description() {
+			return null;
+		}
+		
+	}
+	
+	public class Curar extends Event{
+		Treinador t1, t2;
+		EventSet es;
+		int nAtaque = 0;
+		long tm;
+		public Curar(Treinador t1, EventSet es, long tm){
+			super(tm);
+			this.tm = tm;
+			this.t1 = t1;
+			this.t2 = t2;
+			this.es = es;
+		}
+		public void action() {
+			System.out.println(t1.getNome() + " utilizou potion");
+			t1.curar();
+		}
+
+		public String description() {
+			return t1.getPokeAtivo().getNome() + " está com " +
+					String.valueOf(t1.getPokeAtivo().getVida()) + " de vida";
+		}
+		
+	}
 	public class Agir extends Event{
 		Treinador t1, t2;
 		EventSet es;
@@ -136,8 +191,21 @@ public class BattleControl extends Controller {
 		}
 		
 		public void action() {
-			es.add(t1.agir(t1, t2, es, tm+2*TEMPO)); 
-			es.add(t2.agir(t2, t1, es, tm+4*TEMPO)); 
+			Event e1, e2;
+			e1 = t1.agir(t1, t2, es, tm+2*TEMPO);
+			e2 = t2.agir(t2, t1, es, tm+4*TEMPO);
+			if( e1 instanceof Fugir){
+				es.add(e1);
+			}
+			else if(e2 instanceof Fugir){
+				es.add(e2);
+			}
+			
+			else{
+				es.add(e1); 
+				es.add(e2); 
+			}
+			
 			es.add(new Agir(t1, t2, es, tm + 6*TEMPO));
 			
 		}
@@ -196,7 +264,7 @@ public class BattleControl extends Controller {
 	public static void main(String[] args) {
 		BattleControl bc = new BattleControl();
 		long tm = System.currentTimeMillis();
-		Treinador t1 = new Ash();
+		Treinador t1 = new Bobao();
 		Treinador t2 = new Brook();
 		bc.addEvent(bc.new Batalhar(t1, t2, tm));
 		bc.run();
